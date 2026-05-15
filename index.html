@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tasks</h1>
+            <p id="date-display"></p>
+        </header>
+
+        <section class="input-section">
+            <form id="task-form">
+                <input type="text" id="task-input" placeholder="新しいタスクを追加..." autocomplete="off">
+                <button type="submit" id="add-btn">+</button>
+            </form>
+        </section>
+
+        <section class="filter-section">
+            <button class="filter-btn active" data-filter="all">すべて</button>
+            <button class="filter-btn" data-filter="active">未完了</button>
+            <button class="filter-btn" data-filter="completed">完了済み</button>
+        </section>
+
+        <ul id="task-list"></ul>
+
+        <footer class="stats-footer">
+            <span id="items-left">0 items left</span>
+            <button id="clear-completed">完了済みを削除</button>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
