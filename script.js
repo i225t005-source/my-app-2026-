@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const characterBubble = document.getElementById('character-bubble');
     const character = document.getElementById('character');
+    const bgm = document.getElementById('bgm');
+
+    // Play BGM on first interaction (due to browser autoplay policies)
+    const startBGM = () => {
+        bgm.play().catch(error => {
+            console.log("Autoplay prevented:", error);
+        });
+        document.removeEventListener('click', startBGM);
+        document.removeEventListener('keydown', startBGM);
+    };
+
+    document.addEventListener('click', startBGM);
+    document.addEventListener('keydown', startBGM);
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     let currentFilter = 'all';
