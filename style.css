@@ -218,8 +218,8 @@ header h1 {
 /* Character Styling */
 #character-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 40px;
+    right: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -228,13 +228,13 @@ header h1 {
 
 #character-bubble {
     background: white;
-    padding: 8px 16px;
-    border-radius: 15px;
-    border: 2px solid var(--primary);
-    margin-bottom: 10px;
-    font-size: 0.8rem;
+    padding: 24px 48px;
+    border-radius: 45px;
+    border: 6px solid var(--primary);
+    margin-bottom: 30px;
+    font-size: 2.4rem;
     position: relative;
-    max-width: 150px;
+    max-width: 450px;
     text-align: center;
     box-shadow: var(--shadow);
     color: var(--text-main);
@@ -243,9 +243,9 @@ header h1 {
 #character-bubble::after {
     content: '';
     position: absolute;
-    bottom: -8px;
-    right: 20px;
-    border-width: 8px 8px 0;
+    bottom: -24px;
+    right: 60px;
+    border-width: 24px 24px 0;
     border-style: solid;
     border-color: var(--primary) transparent transparent;
 }
