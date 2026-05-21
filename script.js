@@ -139,12 +139,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderTasks = () => {
         taskList.innerHTML = '';
+        const characterContainer = document.getElementById('character-container');
+        
+        // Remove old filter classes
+        characterContainer.classList.remove('filter-overdue', 'filter-danger', 'filter-urgent');
         
         const filteredTasks = tasks.filter(task => {
             if (currentFilter === 'active') return !task.completed;
             if (currentFilter === 'completed') return task.completed;
+            
+            if (task.dueDate && !task.completed) {
+                const now = new Date();
+                const due = new Date(task.dueDate);
+                const diff = due - now;
+                const hoursLeft = diff / (1000 * 60 * 60);
+
+                if (currentFilter === 'overdue') return diff < 0;
+                if (currentFilter === 'danger') return diff >= 0 && hoursLeft <= 24;
+                if (currentFilter === 'urgent') return diff >= 0 && hoursLeft <= 72;
+            } else if (['overdue', 'danger', 'urgent'].includes(currentFilter)) {
+                return false;
+            }
+            
             return true;
         });
+
+        // Add class to container based on current filter for special effects
+        if (currentFilter === 'overdue') characterContainer.classList.add('filter-overdue');
+        if (currentFilter === 'danger') characterContainer.classList.add('filter-danger');
+        if (currentFilter === 'urgent') characterContainer.classList.add('filter-urgent');
 
         filteredTasks.forEach(task => {
             const li = document.createElement('li');

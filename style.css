@@ -326,12 +326,52 @@ header h1 {
     border-color: var(--primary) transparent transparent;
 }
 
+/* Filter-specific Character States */
+#character-container.filter-overdue #character-bubble {
+    border-color: #888888;
+    color: #888888;
+    background-color: #f0f0f0;
+}
+#character-container.filter-overdue #character-bubble::after {
+    border-top-color: #888888;
+}
+#character-container.filter-overdue #character {
+    filter: grayscale(1);
+    animation-duration: 6s;
+}
+
+#character-container.filter-danger #character-bubble {
+    border-color: #e60000;
+    color: #e60000;
+    background-color: #fff0f0;
+    box-shadow: 0 0 15px rgba(230, 0, 0, 0.3);
+}
+#character-container.filter-danger #character-bubble::after {
+    border-top-color: #e60000;
+}
+#character-container.filter-danger #character {
+    animation: shake 0.1s infinite;
+}
+
+#character-container.filter-urgent #character-bubble {
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+    background-color: #fffafa;
+}
+#character-container.filter-urgent #character-bubble::after {
+    border-top-color: #ff4d4d;
+}
+#character-container.filter-urgent #character {
+    animation-duration: 1s;
+}
+
 #character {
     width: 300px;
     height: auto;
     cursor: pointer;
     animation: bounce 3s infinite ease-in-out;
     z-index: 1000;
+    transition: all 0.3s ease;
 }
 
 @keyframes bounce {
