@@ -6,9 +6,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsLeft = document.getElementById('items-left');
     const clearCompletedBtn = document.getElementById('clear-completed');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const characterBubble = document.getElementById('character-bubble');
+    const character = document.getElementById('character');
 
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     let currentFilter = 'all';
+
+    const characterMessages = [
+        "いい調子ですね！",
+        "応援しています！",
+        "休憩も大切ですよ。",
+        "タスク、終わらせちゃいましょう！",
+        "今日もお疲れ様です♪"
+    ];
+
+    const updateCharacterMessage = (message) => {
+        characterBubble.textContent = message;
+        characterBubble.style.animation = 'none';
+        characterBubble.offsetHeight; // trigger reflow
+        characterBubble.style.animation = 'fadeIn 0.3s ease';
+    };
+
+    character.addEventListener('click', () => {
+        const randomMessage = characterMessages[Math.floor(Math.random() * characterMessages.length)];
+        updateCharacterMessage(randomMessage);
+    });
 
     // Set Date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -32,10 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         tasks.push(newTask);
         taskInput.value = '';
+        updateCharacterMessage("新しいタスク！頑張りましょう！");
         saveTasks();
     };
 
     const toggleTask = (id) => {
+        const task = tasks.find(t => t.id === id);
+        if (task && !task.completed) {
+            updateCharacterMessage("お見事です！その調子！");
+        }
         tasks = tasks.map(task => 
             task.id === id ? { ...task, completed: !task.completed } : task
         );
