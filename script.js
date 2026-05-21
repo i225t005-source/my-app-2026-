@@ -41,6 +41,46 @@ document.addEventListener('DOMContentLoaded', () => {
         characterBubble.style.animation = 'fadeIn 0.3s ease';
     };
 
+    const updateCharacterStatus = () => {
+        const incompleteTasks = tasks.filter(t => !t.completed);
+        let mostUrgentMessage = "";
+        let severity = 0; // 0: normal, 1: urgent, 2: danger, 3: overdue
+
+        incompleteTasks.forEach(task => {
+            if (task.dueDate) {
+                const now = new Date();
+                const due = new Date(task.dueDate);
+                const diff = due - now;
+                const hoursLeft = diff / (1000 * 60 * 60);
+
+                if (diff < 0) {
+                    if (severity < 3) {
+                        mostUrgentMessage = "君には失望したよ（期限切れのタスクがあります）";
+                        severity = 3;
+                    }
+                } else if (hoursLeft <= 24) {
+                    if (severity < 2) {
+                        mostUrgentMessage = "危険すぎる！急いで！";
+                        severity = 2;
+                    }
+                } else if (hoursLeft <= 72) {
+                    if (severity < 1) {
+                        mostUrgentMessage = "急いだほうがいいんちゃう？";
+                        severity = 1;
+                    }
+                }
+            }
+        });
+
+        if (mostUrgentMessage) {
+            updateCharacterMessage(mostUrgentMessage);
+        } else if (incompleteTasks.length === 0 && tasks.length > 0) {
+            updateCharacterMessage("全タスク完了！素晴らしいです！");
+        } else {
+            updateCharacterMessage("こんにちは！タスクを頑張りましょう！");
+        }
+    };
+
     character.addEventListener('click', () => {
         const randomMessage = characterMessages[Math.floor(Math.random() * characterMessages.length)];
         updateCharacterMessage(randomMessage);
@@ -53,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveTasks = () => {
         localStorage.setItem('tasks', JSON.stringify(tasks));
         renderTasks();
+        updateCharacterStatus();
     };
 
     const addTask = (e) => {
@@ -175,4 +216,5 @@ document.addEventListener('DOMContentLoaded', () => {
     clearCompletedBtn.addEventListener('click', clearCompleted);
 
     renderTasks();
+    updateCharacterStatus();
 });
