@@ -44,6 +44,7 @@ header h1 {
     font-size: 2rem;
     font-weight: 600;
     color: var(--primary);
+    font-family: "Sawarabi Mincho", "Hiragino Mincho ProN", "MS Mincho", serif;
 }
 
 #date-display {
