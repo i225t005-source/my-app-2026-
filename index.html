@@ -25,12 +25,16 @@
         </section>
 
         <section class="filter-section">
-            <button class="filter-btn active" data-filter="all">すべて</button>
-            <button class="filter-btn" data-filter="active">未完了</button>
-            <button class="filter-btn" data-filter="completed">完了済み</button>
-            <button class="filter-btn" data-filter="overdue">期限切れ</button>
-            <button class="filter-btn" data-filter="danger">1日前</button>
-            <button class="filter-btn" data-filter="urgent">3日前</button>
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">すべて</button>
+                <button class="filter-btn" data-filter="active">未完了</button>
+                <button class="filter-btn" data-filter="completed">完了済み</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn" data-filter="overdue">期限切れ</button>
+                <button class="filter-btn" data-filter="danger">1日前</button>
+                <button class="filter-btn" data-filter="urgent">3日前</button>
+            </div>
         </section>
 
         <ul id="task-list"></ul>
