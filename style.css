@@ -251,7 +251,7 @@ header h1 {
 }
 
 #character {
-    width: 100px;
+    width: 300px;
     height: auto;
     cursor: pointer;
     animation: bounce 3s infinite ease-in-out;
